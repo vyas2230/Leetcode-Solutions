@@ -1,0 +1,71 @@
+BRUTE FORCE APPROACH
+
+vector<int> twoSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        vector<int> ans;
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                if(nums[i]+nums[j]==target){
+                    ans.push_back(i);
+                    ans.push_back(j); 
+                break;
+                }
+            }
+        }
+        return ans;
+            
+    }
+    
+    OPTIMAL APPROACH
+    
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        int n=nums.size();
+        vector<int> ans(n);
+        vector<int> pp;
+        for(int i=0;i<n;i++)
+            ans[i]=nums[i];
+        
+        sort(nums.begin(), nums.end());
+        int i=0,j=n-1;
+        while(i<j){
+            if(nums[i]+nums[j]==target)
+                break;
+        else if(nums[i]+nums[j]>target)
+            j--;
+        else
+            i++;
+        }
+        
+        for(int z=0;z<n;z++){
+            if(nums[i]==ans[z])
+                pp.push_back(z);
+            else if(nums[j]==ans[z])
+                pp.push_back(z);
+        }
+        
+
+       
+        return pp;
+    }
+    
+    OPTIMIZED APPROACH
+    
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> pp;
+        int n=nums.size();
+        int i;
+        vector<int> ans;
+        for(i=0;i<n;i++){
+            
+                if(pp.find(target-nums[i])!=pp.end()){
+                    ans.push_back(pp[target-nums[i]]);
+                    ans.push_back(i); 
+                    return ans;
+                }
+            pp[nums[i]]=i;
+            }
+        
+        return ans;
+            
+    }
